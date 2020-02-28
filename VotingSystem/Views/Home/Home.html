@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>投票后台管理系统</title>
+		<script src="~/Scripts/jquery-3.4.1.js"></script>
+		<script src="../../Source/packages/layui/layui.js"></script>
+		<script src="../../Scripts/Project/Home/Home.js"></script>
+		<link rel="stylesheet" href="../../Source/packages/layui/css/layui.css">
+	</head>
+	
+	<body>
+		<div class="layui-layout layui-layout-admin" id="face">
+		        <div class="layui-header">
+		            <div class="layui-logo">
+		                <i class="layui-icon layui-icon-rate" style="font-size: 30px; color: #55ffff;"></i>
+		                投票管理系统
+		            </div>
+		            <!-- 头部区域 -->
+		            <ul class="layui-nav layui-layout-right">
+						<li class="layui-nav-item">
+							<a href="javascript:;">
+								<img src="../../Source/images/headPic.jpg" class="layui-nav-img">
+								亚双义、一真
+							</a>
+						</li>
+		                <li class="layui-nav-item"><a href="../Login/Login">退出登录</a></li>
+		            </ul>
+		        </div>
+		
+		        <!-- 左边导航页面 -->
+		        <div class="layui-side layui-bg-black">
+		            <ul class="layui-side-scroll layui-nav layui-nav-tree">
+		                <li class="layui-nav-item"><a onclick="setSrc('/Project/Project')"><i class="layui-icon layui-icon-survey" style="font-size: 18px; color: #55ffff;"></i>项目管理</a></li>
+		                <li class="layui-nav-item"><a onclick="setSrc('/Expert/Expert')"><i class="layui-icon layui-icon-user" style="font-size: 18px; color: #55ffff;"></i>评委管理</a></li>
+		                <li class="layui-nav-item"><a onclick="setSrc('/Result/Result')"><i class="layui-icon layui-icon-form" style="font-size: 18px; color: #55ffff;"></i>评审结果</a></li>
+		            </ul>
+		        </div>
+		
+		        <!-- 主体显示的地方 -->
+		        <div class="layui-body" id="body">
+		            <iframe id="iframeMain" src="" frameborder="0" style="width:100%;height:100%;" class="layadmin-iframe"></iframe>
+		        </div>
+		
+		        <div class="layui-footer" align="center">
+		            <!-- 底部固定区域 -->
+		            © @DateTime.Now.Year - <a href="https://github.com/yashuangyi" title="我的Github">亚双义、一真</a>
+		        </div>
+		    </div>
+	</body>
+</html>
