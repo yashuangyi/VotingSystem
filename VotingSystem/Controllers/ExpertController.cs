@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace VotingSystem.Controllers
 {
+    /// <summary>
+    /// 评委管理iframe的控制器.
+    /// </summary>
     public class ExpertController : Controller
     {
-        // GET: Expert
-        public ActionResult Index()
+        /// <summary>
+        /// 返回评委管理界面.
+        /// </summary>
+        /// <returns>评委管理界面.</returns>
+        public ActionResult Expert()
         {
             return View();
         }

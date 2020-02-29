@@ -17,9 +17,9 @@ layui.config({
                 //登录成功
                 if (res.code === 200) {
                     layer.open({
-                        title: '欢迎使用投票后台管理系统~'
+                        title: '欢迎~'
                         , content: '登录成功!'
-                        , yes: function () {
+                        , end: function () {
                             location.href = "/Home/Home";
                         }
                     });
@@ -38,5 +38,12 @@ layui.config({
                 }
             },
         });
+    });
+
+    //监听“回车键”
+    $(document).keyup(function (event) {
+        if (event.keyCode === 13) {
+            $("#login").click();
+        }
     });
 });

@@ -134,11 +134,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
-    <Content Include="Scripts\Project\Expert\Expert.js" />
-    <Content Include="Scripts\Project\Home\Home.js" />
-    <Content Include="Scripts\Project\Login\Login.js" />
-    <Content Include="Scripts\Project\Project\Project.js" />
-    <Content Include="Scripts\Project\Result\Result.js" />
+    <Content Include="Scripts\Project\Expert\expert.js" />
+    <Content Include="Scripts\Project\Home\home.js" />
+    <Content Include="Scripts\Project\Login\login.js" />
+    <Content Include="Scripts\Project\Project\project.js" />
+    <Content Include="Scripts\Project\Result\result.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +153,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
