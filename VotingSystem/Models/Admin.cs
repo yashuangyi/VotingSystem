@@ -11,10 +11,11 @@ namespace VotingSystem.Models
     public partial class Admin
     {
         // 指定主键和自增列
-        [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
+
         /// <summary>
         /// Gets or sets 用户名.
         /// </summary>
+        [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
         public string Account { get; set; }
 
         /// <summary>

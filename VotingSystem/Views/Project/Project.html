@@ -5,39 +5,39 @@
 		<title>项目管理</title>
 		<script src="~/Scripts/jquery-3.4.1.js"></script>
 		<script src="../../Source/packages/layui/layui.js"></script>
-		<script src="../../Scripts/Project/Project/Project.js"></script>
+		<script src="../../Scripts/Project/Project/project.js"></script>
 		<link rel="stylesheet" href="../../Source/packages/layui/css/layui.css">
 	</head>
 	<body>
 		<blockquote class="layui-elem-quote layui-quote-nm">
 			<button class="layui-btn" onclick="btn_addVote()">新增投票</button>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<i class="layui-icon layui-icon-download-circle"><a href="" width="300" style="color:deepskyblue" height="300">点击下载项目文件模版</a></i>
+			<i class="layui-icon layui-icon-download-circle"><a href="/Source/ProjectFile/项目文件模版.xlsx" width="300" style="color:deepskyblue" height="300">点击下载项目文件模版</a></i>
 		</blockquote>
 		<blockquote class="layui-elem-quote layui-quote-nm">
 			<!--投票项目的表格-->
-			<table id="table_vote"></table>
+			<table id="table_vote" lay-filter="table_vote"></table>
 		</blockquote>
 		<!--新增投票的弹窗-->
-		<div style="" id="div_addVote">
+		<div style="padding-left:20px;padding-right:20px;padding-top:20px" id="div_addVote" hidden>
 			<form class="layui-form">
 				<div class="layui-form-item">
 					<label class="layui-form-label"><span style="color:red">*</span>项目名称</label>
 					<div class="layui-input-inline">
-						<input type="text" name="projectName" id="projectName" lay-verify="required" placeholder="请输入项目名称" autocomplete="off" class="layui-input"> 
+						<input type="text" name="name" id="projectName" lay-verify="required" placeholder="请输入项目名称" autocomplete="off" class="layui-input"> 
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label"><span style="color:red">*</span>备注</label>
-					<div class="layui-input-block">
-						<textarea name="projectRemark" id="projectRemark" lay-verify="required" placeholder="请输入备注（评奖要求等）" autocomplete="off" class="layui-textarea"></textarea>
+					<div class="layui-input-inline">
+						<textarea name="remark" id="projectRemark" lay-verify="required" placeholder="请输入备注（评奖要求等）" autocomplete="off" class="layui-textarea"></textarea>
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label"><span style="color:red">*</span>评审方式</label>
 					<div class="layui-input-inline">
-						<input type="radio" name="radio_method" id="radio_vote" value="投票" title="投票" class="layui-form-radio" checked>
-						<input type="radio" name="radio_method" id="radio_score" value="评分" title="评分">
+						<input type="radio" name="method" id="radio_vote" value="投票" title="投票" class="layui-form-radio" checked>
+						<input type="radio" name="method" id="radio_score" value="评分" title="评分">
 					</div>
 				</div>
 				<div class="layui-form-item">
@@ -49,24 +49,67 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label"><span style="color:red">*</span>开始时间</label>
 					<div class="layui-input-inline">
-						<input type="text" name="startDate" id="startDate" lay-verify="required|date" placeholder="点击选择投票开始时间" autocomplete="off" class="layui-input"> 
+						<input type="text" name="startTime" id="startTime" lay-verify="required|date" placeholder="点击选择投票开始时间" autocomplete="off" class="layui-input"> 
 					</div>
 				</div> 
 				<div class="layui-form-item">
 					<label class="layui-form-label"><span style="color:red">*</span>结束时间</label>
 					<div class="layui-input-inline">
-						<input type="text" name="endDate" id="endDate" lay-verify="required|date" placeholder="点击选择投票结束时间" autocomplete="off" class="layui-input"> 
+						<input type="text" name="endTime" id="endTime" lay-verify="required|date" placeholder="点击选择投票结束时间" autocomplete="off" class="layui-input"> 
 					</div>
 				</div> 
 				<div class="layui-form-item">
 					<label class="layui-form-label"><span style="color:red">*</span>项目文件</label>
 					<div class="layui-input-inline">
 						<button type="button" class="layui-btn layui-btn-sm" id="btn_selectFile"><i class="layui-icon layui-icon-upload-drag"></i>选择文件</button>
-						<button type="button" class="layui-btn layui-btn-sm" id="btn_updateFile"><i class="layui-icon layui-icon-upload"></i>开始上传</button>
+						<button type="button" class="layui-btn layui-btn-sm" id="btn_uploadFile"><i class="layui-icon layui-icon-upload"></i>开始上传</button>
 					</div>
+					<div id="projectFile"></div>
 				</div> 
-				
+				<!--以下属性不显示，便于更新项目文件-->
+				<div class="layui-form-item" hidden>
+					<textarea id="filePath" name="filePath"></textarea>
+					<textarea id="status" name="status"></textarea>
+					<textarea id="projectId" name="projectId"></textarea>
+					<textarea id="contentNum" name="contentNum"></textarea>
+				</div>
 			</form>
 		</div>
+		
+		<!--layui模版引擎文档(laytpl)-->
+		<!--修改表格的工具列-->
+		<script type="text/html" id="toolbar">
+			{{# if(d.Status === '未启动'){}}
+			<a class="operation" lay-event="edit" title="编辑投票项目">
+			    <i class="layui-icon layui-icon-edit"></i>编辑
+			</a>
+			<a class="operation" style="margin-left:10px;" lay-event="del" title="删除投票项目">
+			    <i class="layui-icon layui-icon-delete"></i>删除
+			</a>
+			<a class="operation" style="margin-left:10px;" lay-event="start" title="启动投票项目">
+			    <i class="layui-icon layui-icon-ok-circle"></i>启动
+			</a>
+			{{#  } }}
+			{{# if(d.Status === '进行中'){}}			
+			<a class="operation" style="margin-left:10px;" lay-event="stop" title="停止投票">
+			    <i class="layui-icon layui-icon-close-fill"></i>结束
+			</a>
+			{{# } }}
+		</script>
+		<!--修改表格的状态列-->
+		<script type="text/html" id="statusbar">
+		    {{# if(d.Status === '未启动'){ }}
+		    <span style="color:#FFC125;">未启动</span>
+		    {{#  } }}
+		    {{# if(d.Status === '进行中'){ }}
+		    <span style="color:#00CD00;">进行中</span>
+		    {{#  } }}
+		    {{# if(d.Status === '结束投票'){ }}
+		    <span style="color: #FF0000">结束投票</span>
+		    {{#  } }}
+		    {{# if(d.Status === '完成统计'){ }}
+		    <span style="color:#55ffff;">完成统计</span>
+		    {{#  } }}
+		</script>
 	</body>
 </html>

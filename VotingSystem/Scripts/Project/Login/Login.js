@@ -14,7 +14,6 @@ layui.config({
                 password: $('#password').val(),
             },
             success: function (res) {
-                //登录成功
                 if (res.code === 200) {
                     layer.open({
                         title: '欢迎~'

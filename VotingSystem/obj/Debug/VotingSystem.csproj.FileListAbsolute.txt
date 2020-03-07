@@ -188,3 +188,11 @@ F:\Study\项目\VotingSystem\VotingSystem\bin\System.Net.Http.Formatting.xml
 F:\Study\项目\VotingSystem\VotingSystem\bin\System.Web.Http.xml
 F:\Study\项目\VotingSystem\VotingSystem\bin\Ubiety.Dns.Core.xml
 F:\Study\项目\VotingSystem\VotingSystem\bin\Ubiety.Logging.Core.xml
+F:\Study\项目\VotingSystem\VotingSystem\bin\ICSharpCode.SharpZipLib.dll
+F:\Study\项目\VotingSystem\VotingSystem\bin\NPOI.dll
+F:\Study\项目\VotingSystem\VotingSystem\bin\NPOI.OOXML.dll
+F:\Study\项目\VotingSystem\VotingSystem\bin\NPOI.OpenXml4Net.dll
+F:\Study\项目\VotingSystem\VotingSystem\bin\NPOI.OpenXmlFormats.dll
+F:\Study\项目\VotingSystem\VotingSystem\bin\QRCoder.dll
+F:\Study\项目\VotingSystem\VotingSystem\bin\System.Drawing.Common.dll
+F:\Study\项目\VotingSystem\VotingSystem\bin\ICSharpCode.SharpZipLib.xml

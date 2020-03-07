@@ -11,10 +11,11 @@ namespace VotingSystem.Models
     public partial class Project
     {
         // 指定主键和自增列
-        [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
+
         /// <summary>
         /// Gets or sets 编号.
         /// </summary>
+        [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
         public int Id { get; set; }
 
         /// <summary>
@@ -46,5 +47,20 @@ namespace VotingSystem.Models
         /// Gets or sets 状态.
         /// </summary>
         public string Status { get; set; }
+
+        /// <summary>
+        /// Gets or sets 专家数.
+        /// </summary>
+        public int ExpertCount { get; set; }
+
+        /// <summary>
+        /// Gets or sets 待读取文件的路径.
+        /// </summary>
+        public string FilePath { get; set; }
+
+        /// <summary>
+        /// Gets or sets 内容数.
+        /// </summary>
+        public int ContentNum { get; set; }
     }
 }

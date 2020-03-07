@@ -1,7 +1,7 @@
 ﻿// Copyright (c) PlaceholderCompany. All rights reserved.
 
-using System.Web.Mvc;
 using SqlSugar;
+using System.Web.Mvc;
 using VotingSystem.DB;
 using VotingSystem.Models;
 
