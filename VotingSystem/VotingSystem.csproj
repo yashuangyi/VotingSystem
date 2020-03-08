@@ -282,6 +282,7 @@
     </Compile>
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Content.cs" />
+    <Compile Include="Models\ContentDTO.cs" />
     <Compile Include="Models\Expert.cs" />
     <Compile Include="Models\ExpertDTO.cs" />
     <Compile Include="Models\Project.cs" />

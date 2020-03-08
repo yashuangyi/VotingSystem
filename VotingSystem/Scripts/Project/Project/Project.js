@@ -211,7 +211,7 @@ layui.config({
 			})
 		}
 		else if(obj.event === 'del'){
-			layer.confirm('确认删除该投票项目?',function(){
+			layer.confirm('该操作将删除该项目下所属评审内容,确认删除该投票项目?',function(){
 				$.getJSON('/Project/DelProject',{projectId:data.Id},function(res){
 					if(res.code === 200){
 						layer.alert("删除成功!",function success(){

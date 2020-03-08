@@ -34,10 +34,10 @@ layui.config({
 		}
 	});
 	
-	//监听搜索
-	form.on('submit(search-project)',function(data){
+	//监听选择框
+	form.on('select(searchProject)',function(data){
 		table.reload('table_expert',{
-			where:data.filed
+			where:{search:data.value}
 		});
 	});
 
@@ -47,7 +47,8 @@ layui.config({
 		if(obj.event === 'showCode'){
 			layer.open({
 				type:1 ,//页面层
-				area:['300px','350px'],
+				title:"登录二维码",
+				area:['300px','400px'],
 				scrollbar:false,
 				content:"<img src='"+data.CodePath+"' width=300px;height=200px;/>"
 			});

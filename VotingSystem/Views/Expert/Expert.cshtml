@@ -20,11 +20,6 @@
 							</select>
 						</div>
 					</div>
-					<div class="layui-inline">
-						<button type="button" class="layui-btn" title="查询" lay-submit lay-filter="search-project">
-							<i class="layui-icon layui-icon-search"></i>
-						</button>
-					</div>
 				</div>
 			</form>
 		</blockquote>
@@ -34,10 +29,10 @@
 		</blockquote>
 		<script type="text/html" id="statusbar">
 		    {{# if(d.Status === '未投票'){ }}
-		    <span style="color:#ff0000;">未启动</span>
+		    <span style="color:#ff0000;">未投票</span>
 		    {{#  } }}
 		    {{# if(d.Status === '已投票'){ }}
-		    <span style="color:#55ffff;">进行中</span>
+		    <span style="color:#55ffff;">已投票</span>
 		    {{#  } }}
 		</script>
 		<script type="text/html" id="toolbar">

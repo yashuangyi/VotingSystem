@@ -1,6 +1,6 @@
-﻿using SqlSugar;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using SqlSugar;
 using VotingSystem.DB;
 using VotingSystem.Models;
 
@@ -49,23 +49,45 @@ namespace VotingSystem.Controllers
         {
             // 须返回数据条数
             int count = Db.Queryable<Expert>().Count();
+            List<ExpertDTO> list = null;
 
             // 分页操作，Skip()跳过前面数据项
-            List<ExpertDTO> list = Db.Queryable<Project, Expert>((project, expert) => new object[]
+            if (string.IsNullOrEmpty(search) || search == "请选择待查询项目")
             {
-                JoinType.Inner,
-                project.Id == expert.ProjectId,
-            }).Select((project, expert) => new ExpertDTO
+                list = Db.Queryable<Project, Expert>((project, expert) => new object[]
+                {
+                    JoinType.Inner,
+                    project.Id == expert.ProjectId,
+                }).Select((project, expert) => new ExpertDTO
+                {
+                    Id = expert.Id,
+                    ProjectId = expert.ProjectId,
+                    Status = expert.Status,
+                    Name = expert.Name,
+                    Account = expert.Account,
+                    Password = expert.Password,
+                    CodePath = expert.CodePath,
+                    ProjectName = project.Name,
+                }).Skip((page - 1) * limit).Take(limit).ToList();
+            }
+            else
             {
-                Id = expert.Id,
-                ProjectId = expert.ProjectId,
-                Status = expert.Status,
-                Name = expert.Name,
-                Account = expert.Account,
-                Password = expert.Password,
-                CodePath = expert.CodePath,
-                ProjectName = project.Name,
-            }).Skip((page - 1) * limit).Take(limit).ToList();
+                list = Db.Queryable<Project, Expert>((project, expert) => new object[]
+                {
+                    JoinType.Inner,
+                    project.Id == expert.ProjectId && project.Name == search,
+                }).Select((project, expert) => new ExpertDTO
+                {
+                    Id = expert.Id,
+                    ProjectId = expert.ProjectId,
+                    Status = expert.Status,
+                    Name = expert.Name,
+                    Account = expert.Account,
+                    Password = expert.Password,
+                    CodePath = expert.CodePath,
+                    ProjectName = project.Name,
+                }).Skip((page - 1) * limit).Take(limit).ToList();
+            }
 
             // 参数必须一一对应，JsonRequestBehavior.AllowGet一定要加，表单要求code返回0
             return Json(new { code = 0, msg = string.Empty, count, data = list }, JsonRequestBehavior.AllowGet);

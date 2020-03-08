@@ -90,9 +90,14 @@
 			    <i class="layui-icon layui-icon-ok-circle"></i>启动
 			</a>
 			{{#  } }}
-			{{# if(d.Status === '进行中'){}}			
+			{{# else if(d.Status === '进行中'){}}			
 			<a class="operation" style="margin-left:10px;" lay-event="stop" title="停止投票">
 			    <i class="layui-icon layui-icon-close-fill"></i>结束
+			</a>
+			{{# } }}
+			{{# else{}}
+			<a class="operation" style="margin-left:10px;" lay-event="del" title="删除投票项目">
+			    <i class="layui-icon layui-icon-delete"></i>删除
 			</a>
 			{{# } }}
 		</script>
