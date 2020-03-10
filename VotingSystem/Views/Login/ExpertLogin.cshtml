@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta name="theme-color" content="#3d3c53">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=0">
+    <title>投票登录系统</title>
+    <script src="../../Source/packages/login/js/jquery-1.8.3.min.js"></script>
+    <script src="../../Scripts/jquery-3.4.1.js"></script>
+    <script src="../../Source/packages/login/js/layer.js"></script>
+    <script src="../../Source/packages/login/js/fastclick.js"></script>
+    <link rel="stylesheet" href="../../Source/packages/login/css/common.css">
+    <link rel="stylesheet" href="../../Source/packages/login/css/login.css">
+    <script>
+        /**
+         * YDUI 可伸缩布局方案
+         * rem计算方式：设计图尺寸px / 100 = 实际rem  【例: 100px = 1rem，32px = .32rem】
+         */
+        !function (window) {
+
+            /* 设计图文档宽度 */
+            var docWidth = 750;
+
+            var doc = window.document,
+                docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+
+            var recalc = (function refreshRem() {
+                var clientWidth = docEl.getBoundingClientRect().width;
+
+                /* 8.55：小于320px不再缩小，11.2：大于420px不再放大 */
+                docEl.style.fontSize = Math.max(Math.min(20 * (clientWidth / docWidth), 11.2), 8.55) * 5 + 'px';
+
+                return refreshRem;
+            })();
+
+            /* 添加倍屏标识，安卓为1 */
+            docEl.setAttribute('data-dpr', window.navigator.appVersion.match(/iphone/gi) ? window.devicePixelRatio : 1);
+
+            if (/iP(hone|od|ad)/.test(window.navigator.userAgent)) {
+                /* 添加IOS标识 */
+                doc.documentElement.classList.add('ios');
+                /* IOS8以上给html添加hairline样式，以便特殊处理 */
+                if (parseInt(window.navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/)[1], 10) >= 8)
+                    doc.documentElement.classList.add('hairline');
+            }
+
+            if (!doc.addEventListener) return;
+            window.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+
+        }(window);
+    </script>
+</head>
+<body>
+    <div class="login-wrapper" style="text-align:center;">
+        <div class="login-wrapper-inner">
+            <br /><br />
+            <h3>投票登录系统</h3>
+            <form class="form-submit-cont">
+                <div class="form-group-wrapper">
+                    <div class="group-input-item">
+                        <div class="Icon">
+                            <i class="user-icon"></i>
+                        </div>
+                        <div class="user-input">
+                            <input type="text" name="account" id="id_expertCount" placeholder="请输入账号">
+                        </div>
+                    </div>
+                    <div class="group-input-item">
+                        <div class="Icon">
+                            <i class="pw-icon"></i>
+                        </div>
+                        <div class="user-input">
+                            <input type="password" name="password" id="pw_expertCount" placeholder="请输入密码">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="form-group-btn">
+                <button class="login-btn" id="btn_expertLogin">登录</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        $("#btn_expertLogin").click(function () {
+            $.ajax({
+                url: "/Login/ExpertCheck",
+                dataType: "json",
+                type: "post",
+                data: {
+                    account: $('#id_expertCount').val(),
+                    password: $('#pw_expertCount').val(),
+                },
+                success: function (res) {
+                    if (res.code === 200) {
+                        layer.open({
+                            title: '欢迎~'
+                            , content: '登录成功!'
+                            , time: 2
+                            , end: function () {
+                                location.href = "/VotingHome/VotingHome?" + $('#id_expertCount').val() + "&" + $('#pw_expertCount').val();
+                            }
+                        });
+                    }
+                    else if (res.code === 401) {
+                        layer.open({
+                            title: 'Fail'
+                            , content: '请输入账号及密码!'
+                            , time: 2
+                        });
+                    }
+                    else if (res.code === 404) {
+                        layer.open({
+                            title: 'Fail'
+                            , content: '账号或密码错误，请重新输入!'
+                            , time: 2
+                        });
+                    }
+                },
+            });
+        });
+    </script>
+</body>
+</html>

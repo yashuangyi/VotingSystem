@@ -51,14 +51,6 @@ namespace VotingSystem.Controllers
             int count = Db.Queryable<Content>().Count();
             List<ContentDTO> list = null;
 
-            // 获取已投票的评委数
-            // 有BUG
-            int hasVote = 0;
-            if (Db.Queryable<Expert>().Where(it => it.Status == "已投票") != null)
-            {
-                hasVote = Db.Queryable<Expert>().Where(it => it.Status == "已投票").Count();
-            }
-
             // 分页操作，Skip()跳过前面数据项
             if (string.IsNullOrEmpty(search) || search == "请选择待查询项目")
             {
@@ -76,9 +68,7 @@ namespace VotingSystem.Controllers
                     Result = content.Result,
                     Method = project.Method,
                     ProjectName = project.Name,
-                    // 有bug
-                    Progress = (hasVote.ToString() + "/" + project.ExpertCount.ToString()).ToString(),
-                    TicketsNum = content.FirstPrizeNum + "/" + content.SecondPrizeNum + "/" + content.ThirdPrizeNum + "/" + content.GiveupNum,
+                    Progress = project.ExpertCount.ToString(),
                 }).Skip((page - 1) * limit).Take(limit).ToList();
             }
             else
@@ -97,9 +87,15 @@ namespace VotingSystem.Controllers
                     Result = content.Result,
                     Method = project.Method,
                     ProjectName = project.Name,
-                    Progress = hasVote + "/" + project.ExpertCount,
-                    TicketsNum = content.FirstPrizeNum + "/" + content.SecondPrizeNum + "/" + content.ThirdPrizeNum + "/" + content.GiveupNum,
+                    Progress = project.ExpertCount.ToString(),
+                    HasVote = content.HasVote,
                 }).Skip((page - 1) * limit).Take(limit).ToList();
+            }
+
+            foreach (var item in list)
+            {
+                item.Progress = item.HasVote + " / " + item.Progress;
+                item.TicketsNum = item.FirstPrizeNum + " / " + item.SecondPrizeNum + " / " + item.ThirdPrizeNum + " / " + item.GiveupNum;
             }
 
             // 参数必须一一对应，JsonRequestBehavior.AllowGet一定要加，表单要求code返回0

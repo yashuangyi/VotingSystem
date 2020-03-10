@@ -267,6 +267,8 @@
     <Content Include="Source\packages\layui\lay\modules\tree.js" />
     <Content Include="Source\packages\layui\lay\modules\upload.js" />
     <Content Include="Source\packages\layui\lay\modules\util.js" />
+    <Content Include="Views\Login\ExpertLogin.html" />
+    <Content Include="Views\VotingHome\VotingHome.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -276,6 +278,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\ResultController.cs" />
+    <Compile Include="Controllers\VotingHomeController.cs" />
     <Compile Include="DB\DataBase.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -306,6 +309,8 @@
     <Content Include="Source\packages\layui\font\iconfont.woff" />
     <Content Include="Source\packages\layui\font\iconfont.woff2" />
     <Content Include="Source\ProjectFile\项目文件模板.xlsx" />
+    <Content Include="Views\Login\ExpertLogin.cshtml" />
+    <Content Include="Views\VotingHome\VotingHome.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
