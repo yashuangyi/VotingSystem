@@ -10,6 +10,7 @@
     <meta content="yes" name="apple-touch-fullscreen">
     <meta content="telephone=no,email=no" name="format-detection">
     <meta name="theme-color" content="#3d3c53">
+    <!-- viewport是自动适配手机屏幕的大小的 -->
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=0">
     <title>投票登录系统</title>
     <script src="../../Source/packages/login/js/jquery-1.8.3.min.js"></script>
@@ -106,7 +107,8 @@
                             , content: '登录成功!'
                             , time: 2
                             , end: function () {
-                                location.href = "/VotingHome/VotingHome?" + $('#id_expertCount').val() + "&" + $('#pw_expertCount').val();
+                                console.log(res.data);
+                                location.href = "/VotingHome/VotingHome";
                             }
                         });
                     }

@@ -1,10 +1,54 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <meta charset="utf-8">
+    <!-- viewport是自动适配手机屏幕的大小的 -->
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=0">
+    <title>投票系统主页</title>
+    <script src="../../Scripts/jquery-3.4.1.js"></script>
+    <script src="../../Source/packages/weui/js/zepto.weui.js"></script>
+    <script src="../../Source/packages/weui/js/zepto.min.js"></script>
+    <script src="../../Scripts/Project/VotingHome/votingHome.js"></script>
+    <link rel="stylesheet" href="../../Source/packages/weui/css/weui.css">
+    <link rel="stylesheet" href="../../Source/packages/weui/css/weuix.css">
+    <link rel="stylesheet" href="../../Source/packages/weui/css/demos.css">
+    <link rel="stylesheet" href="../../Source/packages/layui/css/layui.css">
 </head>
-<body>
-
+<body ontouchstart>
+    <input type="text" id="expert_id" value="@ViewBag.ExpertId" hidden=""/>
+    <div style="background-color: #DCDCDC;">
+        <header class="demos-header">
+        <div align="center">
+            <img src="../../Source/images/vote.jpg" style="width: 100px;height: 80px;"/>
+        </div>
+        <h1 class="demos-title">投票管理系统</h1>
+        </header>
+        <div align="center">
+        <i class="layui-icon layui-icon-user" style="font-size:20px;color:black;"></i>
+        名称：
+        <div class="layui-input-inline">
+            <input id="expert_name" style="border:none; background-color: #DCDCDC;"/>
+        </div>
+        <br />
+        <i class="layui-icon layui-icon-log" style="font-size:20px;color:black;"></i>
+        状态：
+        <div class="layui-input-inline">
+            <input id="expert_isVote" style="border:none; background-color: #DCDCDC;"/>
+        </div>
+        </div> 
+        <div class="demos-content-padded">
+        <article class="weui-article">
+            <p>欢迎使用本投票系统，请注意以下事项：</p>
+            <ul>
+            <li>1、状态为“未投票”时方可进入“开始投票”界面</li>
+            <li>2、状态为“已投票”方可进入“查看结果”界面</li>
+            <li>3、完成所有评审后方可提交</li>
+            </ul>
+            <br /><br />
+            <a id="btn_startVote" class="weui-btn weui-btn_primary">开始投票</a>
+            <a id="btn_viewResult" class="weui-btn weui-btn_primary">查看结果</a>
+        </article>
+        </div>
+  </div>
 </body>
 </html>

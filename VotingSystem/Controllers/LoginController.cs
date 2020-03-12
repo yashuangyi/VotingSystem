@@ -1,7 +1,7 @@
 ﻿// Copyright (c) PlaceholderCompany. All rights reserved.
 
-using SqlSugar;
 using System.Web.Mvc;
+using SqlSugar;
 using VotingSystem.DB;
 using VotingSystem.Models;
 
@@ -76,6 +76,7 @@ namespace VotingSystem.Controllers
                 var login = Db.Queryable<Expert>().Where(it => it.Account == account && it.Password == password).Single();
                 if (login != null)
                 {
+                    Session.Add("expertId", login.Id);
                     return Json(new { code = 200 }, JsonRequestBehavior.AllowGet);
                 }
                 else
