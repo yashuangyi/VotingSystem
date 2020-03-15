@@ -34,6 +34,7 @@ layui.config({
                         title: 'Fail'
                         , content: '账号或密码错误，请重新输入!'
                     });
+                    $('#password').val("");
                 }
             },
         });

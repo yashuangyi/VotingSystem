@@ -57,11 +57,12 @@ namespace VotingSystem.Controllers
                 return Json(new { code = 401, msg = "请先上传投票项目文件！" }, JsonRequestBehavior.AllowGet);
             }
 
-            if (Db.Queryable<Project>().Count(it => it.Status != "结束投票") != 0)
-            {
-                // 有进行中的投票项目
-                return Json(new { code = 402 }, JsonRequestBehavior.AllowGet);
-            }
+            // 限制同时只能存在唯一的投票项目的开关，若要开启该功能请解除下列代码的注释！
+            // if (Db.Queryable<Project>().Count(it => it.Status != "结束投票") != 0)
+            // {
+            //    // 有进行中的投票项目
+            //    return Json(new { code = 402 }, JsonRequestBehavior.AllowGet);
+            // }
 
             // 自增列用法
             int projectId = Db.Insertable(project).ExecuteReturnIdentity();
