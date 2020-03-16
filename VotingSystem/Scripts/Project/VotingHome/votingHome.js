@@ -10,8 +10,9 @@ window.onload = function(){
                 if(res.code === 200){
                     $('#expert_name').val(res.expertName);
                     $('#expert_isVote').val(res.expertIsVote);
+                    $('#project_status').val(res.projectStatus);
                 }else{
-                    $.alert("账号异常，请联系管理员！");
+                    $.alert("账号异常，请联系系统管理员！");
                     location.href = "/Login/ExpertLogin";
                 }
             }
@@ -24,7 +25,7 @@ window.onload = function(){
 
 // 监听“开始投票”按钮
 $(document).on("click", "#btn_startVote", function() {
-    if($('#expert_isVote').val() === "未投票"){
+    if($('#expert_isVote').val() === "未投票" && $('#project_status').val() === "进行中"){
         $.ajax({
             type: "post",
             url: "/VotingHome/GetProjectDetail",
@@ -32,35 +33,39 @@ $(document).on("click", "#btn_startVote", function() {
             dataType: "json",
             success: function (res) {
                 if(res.code === 200){
-                    $.alert("项目名称:"+res.project.Name+"<br>备注:"+res.project.Remark+"<br>评审方式:"+res.project.Method+"<br>截止时间:"+res.project.EndTime, "项目信息"), function(){
+                    $.confirm("项目名称:"+res.project.Name+"<br>备注:"+res.project.Remark+"<br>评审方式:"+res.project.Method+"<br>截止时间:"+res.project.EndTime, "项目信息", function(){
                         if(res.project.Method === "评分"){
-                            location.href = "/Voting/Score?"+$('#expert_id').val();
+                            location.href = "/Voting/Score?expertId="+$('#expert_id').val();
                         }else{
-                            location.href = "/Voting/Vote?"+$('#expert_id').val();
+                            location.href = "/Voting/Vote?expertId="+$('#expert_id').val();
                         }
-                    };
+                    }, function(){
+
+                    });
                 }
             }
         });
-    }else{
+    }else if($('#expert_isVote').val() === "已投票"){
         $.alert("您已投过票了！", "提示");
+    }else{
+        $.alert("投票已结束！", "提示");
     }
 });
 
 // 监听“我的评审记录”按钮
-$("#btn_myVote").on("click", function() {
+$(document).on("click", "#btn_myVote", function() {
     if($('#expert_isVote').val() === "已投票"){
-        location.href = "/MyVote/MyVote?"+$('#expert_id').val();
+        location.href = "/MyVote/MyVote?expertId="+$('#expert_id').val();
     }else{
         $.alert("请先完成投票！", "提示");
     }
 });
 
 // 监听“查看结果”按钮
-$("#btn_viewResult").on("click", function() {
-    if($('#expert_isVote').val() === "已投票"){
-        location.href = "/VotingResult/VotingResult?"+$('#expert_id').val();
+$(document).on("click", "#btn_viewResult", function() {
+    if($('#expert_isVote').val() === "完成统计"){
+        location.href = "/VotingResult/VotingResult?expertId="+$('#expert_id').val();
     }else{
-        $.alert("请先完成投票！", "提示");
+        $.alert("请等待最终结果的统计！", "提示");
     }
 });

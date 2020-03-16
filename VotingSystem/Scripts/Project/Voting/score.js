@@ -5,25 +5,30 @@ var totalPageNum = 0; // 总页数
 var hasVoteNum = 0; // 目前已投内容数
 var totalVoteNum = 0; // 总内容数
 
-// 初始化页面，显示第1页数据
-showContentOfPage(page);
+// 初始化页面，显示第1页数据（首先要确保id值被读取，因此要加“锁”）
+window.onload = function(){
+    while(1){
+        if($('#score_expertId').val() != null){
+            showContentOfPage(page);
+            break;
+        }
+    }
+};
 
 // 查询指定页码的内容
 function showContentOfPage(pageNum) {
     // 显示加载logo
     $.showLoading();
     var content = getContent(pageNum);
-    // // 清空原内容
-    // $('#score_content').empty();
     $.post("/Voting/GetContentList", content,
         function (res) {
             if(res.code === 200){
-                var data = res.data;
+                var data = res.list;
                 var showHtml = "";
                 // 生成内容html并添加到页面中
                 for(var i in data){
                     showHtml += 
-                    "<div class='page-hd-title'>" + data[i].Number + " " + data[i].TheName + "</div>" +
+                    "<div class='page-hd-title'>" + data[i].Number + " " + data[i].Name + "</div>" +
                     "<div class='weui-cells weui-cells_form'>" +
                     "<div class='weui-cell'>" +
                     "<div class='weui-cell__hd'><label class='weui-label'>评分</label></div>"+
@@ -35,7 +40,6 @@ function showContentOfPage(pageNum) {
                     "</br>";
                 }
                 $('#score_content').html(showHtml);
-
                 // 加载保存的已填项
                 for(var i in data){
                     if(data[i].Result!=null){
@@ -62,7 +66,7 @@ function showContentOfPage(pageNum) {
 
                 // 生成分页按钮html
                 var pageHtml = "";
-                for (var i = beginPageNum; i <= endPageNum; i++){
+                for (var i = beginPage; i <= endPage; i++){
                     pageHtml += "<a href='javascript:showContentOfPage(" + i + ");'" + i + "</a>";
                 }
                 $("#pager").html(pageHtml);
@@ -76,7 +80,7 @@ function showContentOfPage(pageNum) {
 
 // 获取内容的对象
 function getContent (pageNum) { 
-    var content = new {
+    var content = {
         expertId : $('#score_expertId').val(),
         pageNum : pageNum,
         contentNumPerPage : contentNumPerPage,
@@ -138,7 +142,7 @@ function changeState(element){
 }
 
 // 监听“上一页”按钮
-$("#score_lastPage").on("click", function() {
+$(document).on("click", "#score_lastPage", function() {
     if(page === 1){
         $.toast("当前已是第一页！");
     }else{
@@ -147,7 +151,7 @@ $("#score_lastPage").on("click", function() {
 });
 
 // 监听“下一页”按钮
-$("#score_nextPage").on("click", function() {
+$(document).on("click", "#score_nextPage", function() {
     if(page === totalPageNum){
         $.toast("当前已是最后一页！");
     }else{
@@ -156,7 +160,7 @@ $("#score_nextPage").on("click", function() {
 });
 
 // 监听“提交”按钮
-$("#score_submit").on("click", function() {
+$(document).on("click", "#score_submit", function() {
     if(hasVoteNum!=totalVoteNum){
         $.toast("请先完成所有评分！");
     }else{
@@ -167,7 +171,7 @@ $("#score_submit").on("click", function() {
             $.post("/Voting/SubmitScore", data,
                 function (res) {
                     if(res.code === 200){
-                        $.alert("评分成功！请等待最终结果...",function(){
+                        $.alert("评分成功！请等待最终结果的通知...",function(){
                             location.href = "/VotingHome/VotingHome";
                         });
                     }

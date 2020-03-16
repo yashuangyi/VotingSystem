@@ -69,6 +69,7 @@ namespace VotingSystem.Controllers
                     Method = project.Method,
                     ProjectName = project.Name,
                     Progress = project.ExpertCount.ToString(),
+                    HasVote = project.HasVote,
                 }).Skip((page - 1) * limit).Take(limit).ToList();
             }
             else
@@ -88,7 +89,7 @@ namespace VotingSystem.Controllers
                     Method = project.Method,
                     ProjectName = project.Name,
                     Progress = project.ExpertCount.ToString(),
-                    HasVote = content.HasVote,
+                    HasVote = project.HasVote,
                 }).Skip((page - 1) * limit).Take(limit).ToList();
             }
 

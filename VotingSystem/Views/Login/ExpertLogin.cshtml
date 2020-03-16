@@ -126,6 +126,13 @@
                             , time: 2
                         });
                     }
+                    else if (res.code === 400) {
+                        layer.open({
+                            title: 'Fail'
+                            , content: '该投票项目未启动!'
+                            , time: 2
+                        });
+                    }
                 },
             });
         });

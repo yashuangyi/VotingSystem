@@ -1,17 +1,44 @@
-﻿@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
+﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
+    <meta charset="utf-8" />
+    <!-- viewport是自动适配手机屏幕的大小的 -->
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=0">
+    <title>评分界面</title>
+    <script src="../../Scripts/jquery-3.4.1.js"></script>
+    <script src="../../Source/packages/weui/js/zepto.weui.js"></script>
+    <script src="../../Source/packages/weui/js/zepto.min.js"></script>
+    <script src="../../Scripts/Project/Voting/score.js"></script>
+    <link rel="stylesheet" href="../../Source/packages/weui/css/weui.css">
+    <link rel="stylesheet" href="../../Source/packages/weui/css/weuix.css">
+    <!-- 导航悬浮固定样式 -->
+    <style>
+        .none{display: none}
+        #score_toolbar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        max-width: 100%;
+        left: 0;
+        top:0;  /*置顶*/
+        /*bottom: 0px; */ /*置底*/
+        margin: auto;
+        }
+        </style>
 </head>
 <body>
-    <div>
-    
+    <div style="background-color: #DCDCDC;">
+        <div id="score_toolbar" style="position:fixed;display:block;background-color:aquamarine;"></div>
+        <div id="score_content"></div>
+        <a id="score_lastPage" class="weui-btn weui-btn_plain-primary">上一页</a>
+        <a id="score_nextPage" class="weui-btn weui-btn_plain-primary">下一页</a>
+        <a id="score_submit" class="weui-btn weui-btn_primary">提交</a>
+        <div id="score_pager"></div>
+        <div class="layui-input-inline" align="center">
+            <input id="score_pageTotal" style="border:none; background-color: #DCDCDC;" readonly=""/>
+        </div>
+        <input type="text" id="score_expertId" value="@ViewBag.ExpertId" hidden=""/>
     </div>
 </body>
 </html>

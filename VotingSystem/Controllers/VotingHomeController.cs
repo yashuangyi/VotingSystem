@@ -32,9 +32,11 @@ namespace VotingSystem.Controllers
             var login = Db.Queryable<Expert>().Where(it => it.Id == expertId).Single();
             if (login != null)
             {
+                var project = Db.Queryable<Project>().Where(it => it.Id == login.ProjectId).Single();
+                var projectStatus = project.Status;
                 var expertName = login.Name;
                 var expertIsVote = login.Status;
-                return Json(new { code = 200, expertName, expertIsVote }, JsonRequestBehavior.AllowGet);
+                return Json(new { code = 200, expertName, expertIsVote, projectStatus }, JsonRequestBehavior.AllowGet);
             }
             else
             {

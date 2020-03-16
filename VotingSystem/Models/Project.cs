@@ -62,5 +62,10 @@ namespace VotingSystem.Models
         /// Gets or sets 内容数.
         /// </summary>
         public int ContentNum { get; set; }
+
+        /// <summary>
+        /// Gets or sets 已投票的评委数.
+        /// </summary>
+        public int HasVote { get; set; }
     }
 }

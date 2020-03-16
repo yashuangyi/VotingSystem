@@ -51,7 +51,17 @@ namespace VotingSystem.Controllers
             list = Db.Queryable<Content>().Where(it => it.ProjectId == project.Id).OrderBy(it => it.Id).ToList();
             int count = list.Count();
             list = list.Skip((pageNum - 1) * contentNumPerPage).Take(contentNumPerPage).ToList();
+            for (int i = 0; i < list.Count(); i++)
+            {
+                // 查询是否有值
+                Record record = Db.Queryable<Record>().Where(it => it.ContentId == list[i].Id && it.ExpertId == expertId).Single();
+                if (record != null && record.Value != null)
+                {
+                    list[i].Result = record.Value.ToString();
+                }
+            }
 
+            return Json(new { code = 200, count, list }, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -63,7 +73,26 @@ namespace VotingSystem.Controllers
         /// <returns>json.</returns>
         public ActionResult ChangeScoreValue(int contentId, int expertId, int value)
         {
+            bool isAdd = false;
+            Record record = Db.Queryable<Record>().Where(it => it.ContentId == contentId && it.ExpertId == expertId).Single();
+            if (record != null)
+            {
+                record.Value = value;
+                Db.Updateable(record).ExecuteCommand();
+            }
+            else
+            {
+                Record newRecord = new Record
+                {
+                    ContentId = contentId,
+                    ExpertId = expertId,
+                    Value = value,
+                };
+                Db.Insertable(newRecord).ExecuteCommand();
+                isAdd = true;
+            }
 
+            return Json(new { code = 200, isAdd }, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -74,7 +103,15 @@ namespace VotingSystem.Controllers
         /// <returns>json.</returns>
         public ActionResult DeleteScore(int contentId, int expertId)
         {
+            bool isDelete = false;
+            Record record = Db.Queryable<Record>().Where(it => it.ContentId == contentId && it.ExpertId == expertId).Single();
+            if (record != null)
+            {
+                Db.Deleteable(record).ExecuteCommand();
+                isDelete = true;
+            }
 
+            return Json(new { code = 200, isDelete }, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -84,7 +121,15 @@ namespace VotingSystem.Controllers
         /// <returns>json.</returns>
         public ActionResult SubmitScore(int expertId)
         {
+            var recordList = Db.Queryable<Record>().Where(it => it.ExpertId == expertId).ToList();
+            foreach (Record record in recordList)
+            {
+                var content = Db.Queryable<Content>().Where(it => it.Id == record.ContentId).Single();
+                content.Score += (int)record.Value;
+                Db.Updateable(content).ExecuteCommand();
+            }
 
+            return Json(new { code = 200 }, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -25,24 +25,30 @@
         </header>
         <div align="center">
             <i class="layui-icon layui-icon-user" style="font-size:20px;color:black;"></i>
-            名称：
+            评委名称：
             <div class="layui-input-inline">
                 <input id="expert_name" style="border:none; background-color: #DCDCDC;" readonly=""/>
             </div>
             <br />
-            <i class="layui-icon layui-icon-log" style="font-size:20px;color:black;"></i>
-            状态：
+            <i class="layui-icon layui-icon-vercode" style="font-size:20px;color:black;"></i>
+            投票状态：
             <div class="layui-input-inline">
                 <input id="expert_isVote" style="border:none; background-color: #DCDCDC;" readonly=""/>
+            </div>
+            <br />
+            <i class="layui-icon layui-icon-log" style="font-size:20px;color:black;"></i>
+            项目状态：
+            <div class="layui-input-inline">
+                <input id="project_status" style="border:none; background-color: #DCDCDC;" readonly=""/>
             </div>
         </div> 
         <div class="demos-content-padded">
         <article class="weui-article">
             <p>欢迎使用本投票系统，请注意以下事项：</p>
             <ul>
-            <li>1、状态为“未投票”时方可进入“开始投票”界面</li>
-            <li>2、状态为“已投票”方可进入“我的评审记录”界面</li>
-            <li>3、状态为“已投票”方可进入“查看结果”界面</li>
+            <li>1、投票状态为“未投票”且项目状态为“进行中”时方可进入“开始投票”界面</li>
+            <li>2、投票状态为“已投票”时方可进入“我的评审记录”界面</li>
+            <li>3、项目状态为“结束投票”时方可进入“查看结果”界面</li>
             <li>4、完成所有评审后方可提交</li>
             </ul>
             <br /><br />

@@ -76,6 +76,12 @@ namespace VotingSystem.Controllers
                 var login = Db.Queryable<Expert>().Where(it => it.Account == account && it.Password == password).Single();
                 if (login != null)
                 {
+                    var project = Db.Queryable<Project>().Where(it => it.Id == login.ProjectId).Single();
+                    if (project.Status == "未启动")
+                    {
+                        return Json(new { code = 400 }, JsonRequestBehavior.AllowGet);
+                    }
+
                     Session.Add("expertId", login.Id);
                     return Json(new { code = 200 }, JsonRequestBehavior.AllowGet);
                 }

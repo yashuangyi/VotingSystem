@@ -24,7 +24,7 @@ namespace VotingSystem.Models
         public int ProjectId { get; set; }
 
         /// <summary>
-        /// Gets or sets 结果.
+        /// Gets or sets 结果(投票过程中充当记录值).
         /// </summary>
         public string Result { get; set; }
 
@@ -62,10 +62,5 @@ namespace VotingSystem.Models
         /// Gets or sets 名字.
         /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets 已投票的评委数.
-        /// </summary>
-        public int HasVote { get; set; }
     }
 }
