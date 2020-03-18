@@ -21,7 +21,7 @@ layui.config({
 			{field:"Progress",title:"评审进度"},
 			{field:"Method",title:"评审方式"},
 			{field:"TicketsNum",title:"票数(一等奖/二等奖/三等奖/弃权)",width:300},
-			{field:"Score",title:"分数"},
+			{field:"Score",title:"分数",sort:"true"},
 			{field:"Result",title:"结果"},
 		]]
 	});

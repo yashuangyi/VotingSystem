@@ -30,13 +30,16 @@
 <body>
     <div style="background-color: #DCDCDC;">
         <div id="score_toolbar" style="position:fixed;display:block;background-color:aquamarine;"></div>
+        <br><br>
         <div id="score_content"></div>
         <a id="score_lastPage" class="weui-btn weui-btn_plain-primary">上一页</a>
         <a id="score_nextPage" class="weui-btn weui-btn_plain-primary">下一页</a>
         <a id="score_submit" class="weui-btn weui-btn_primary">提交</a>
-        <div id="score_pager"></div>
-        <div class="layui-input-inline" align="center">
-            <input id="score_pageTotal" style="border:none; background-color: #DCDCDC;" readonly=""/>
+        <div class="page-bd-15">
+            <div id="score_pager" class="pager2" style="background-color:white;"></div>
+        </div>
+        <div align="center">
+            <label id="score_pageTotal"></label>
         </div>
         <input type="text" id="score_expertId" value="@ViewBag.ExpertId" hidden=""/>
     </div>

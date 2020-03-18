@@ -15,5 +15,14 @@ namespace VotingSystem.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 返回首页界面.
+        /// </summary>
+        /// <returns>首页界面.</returns>
+        public ActionResult HomePage()
+        {
+            return View();
+        }
     }
 }

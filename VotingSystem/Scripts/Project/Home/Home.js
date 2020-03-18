@@ -12,3 +12,9 @@ function setSrc(path) {
     var iframe = $("#iframeMain").get(0);
     iframe.src = path;
 }
+
+//刷新按钮
+function freshView(){
+    var iframe = $("#iframeMain").get(0);
+    iframe.src = iframe.src;
+}

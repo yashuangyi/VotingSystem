@@ -271,6 +271,7 @@
     <Content Include="Source\packages\layui\lay\modules\tree.js" />
     <Content Include="Source\packages\layui\lay\modules\upload.js" />
     <Content Include="Source\packages\layui\lay\modules\util.js" />
+    <Content Include="Views\Home\HomePage.html" />
     <Content Include="Views\Login\ExpertLogin.html" />
     <Content Include="Views\MyVote\MyVote.html" />
     <Content Include="Views\VotingHome\VotingHome.html" />
@@ -327,6 +328,7 @@
     <Content Include="Views\Voting\Score.cshtml" />
     <Content Include="Views\Voting\Vote.cshtml" />
     <Content Include="Views\VotingResult\VotingResult.cshtml" />
+    <Content Include="Views\Home\HomePage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -17,6 +17,18 @@
                 投票管理系统
             </div>
             <!-- 头部区域 -->
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item" title="首页">
+                    <a href="/Home/Home">
+                        <i class="layui-icon layui-icon-home"></i>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javaScript:;" class="operation" onclick="freshView()" style="margin-left:10px;" title="刷新">
+                        <i class="layui-icon layui-icon-refresh-3"></i>
+                    </a>
+                </li>
+            </ul>
             <ul class="layui-nav layui-layout-right">
                 <li class="layui-nav-item">
                     <a href="javascript:;">
@@ -31,15 +43,15 @@
         <!-- 左边导航页面 -->
         <div class="layui-side layui-bg-black">
             <ul class="layui-side-scroll layui-nav layui-nav-tree">
-                <li class="layui-nav-item"><a onclick="setSrc('/Project/Project')"><i class="layui-icon layui-icon-survey" style="font-size: 18px; color: #55ffff;"></i>项目管理</a></li>
-                <li class="layui-nav-item"><a onclick="setSrc('/Expert/Expert')"><i class="layui-icon layui-icon-user" style="font-size: 18px; color: #55ffff;"></i>评委管理</a></li>
-                <li class="layui-nav-item"><a onclick="setSrc('/Result/Result')"><i class="layui-icon layui-icon-form" style="font-size: 18px; color: #55ffff;"></i>评审结果</a></li>
+                <li class="layui-nav-item"><a onclick="setSrc('/Project/Project')"><i class="layui-icon layui-icon-survey" style="font-size: 18px; color: #55ffff;"></i>&nbsp 项目管理</a></li>
+                <li class="layui-nav-item"><a onclick="setSrc('/Expert/Expert')"><i class="layui-icon layui-icon-user" style="font-size: 18px; color: #55ffff;"></i>&nbsp 评委管理</a></li>
+                <li class="layui-nav-item"><a onclick="setSrc('/Result/Result')"><i class="layui-icon layui-icon-form" style="font-size: 18px; color: #55ffff;"></i>&nbsp 评审结果</a></li>
             </ul>
         </div>
 
         <!-- 主体显示的地方 -->
         <div class="layui-body" id="body">
-            <iframe id="iframeMain" src="" frameborder="0" style="width:100%;height:100%;" class="layadmin-iframe"></iframe>
+            <iframe id="iframeMain" src="/Home/HomePage" frameborder="0" style="width:100%;height:100%;" class="layadmin-iframe"></iframe>
         </div>
 
         <div class="layui-footer" align="center">

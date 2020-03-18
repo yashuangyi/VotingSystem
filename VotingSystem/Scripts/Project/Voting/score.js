@@ -22,7 +22,10 @@ function showContentOfPage(pageNum) {
     var content = getContent(pageNum);
     $.post("/Voting/GetContentList", content,
         function (res) {
-            if(res.code === 200){
+            if(res.code === 404){
+                $.alert("您已完成了投票！");
+                location.href = "/VotingHome/VotingHome";
+            }else if(res.code === 200){
                 var data = res.list;
                 var showHtml = "";
                 // 生成内容html并添加到页面中
@@ -34,42 +37,47 @@ function showContentOfPage(pageNum) {
                     "<div class='weui-cell__hd'><label class='weui-label'>评分</label></div>"+
                     "<div class='weui-cell__bd weui-cell__primary'>"+
                     "<input class='weui-input' onchange = 'changeState(this)' pattern='^([0-9]|10)$' required name='" + data[i].Id + "' id='" + data[i].Id + "'placeholder='请输入评分（0~10分）', type='number'>" +
-                    " </div>" +
-                    " </div>" +
-                    " </div>" +
+                    "</div>" +
+                    "</div>" +
+                    "</div>" +
                     "</br>";
                 }
                 $('#score_content').html(showHtml);
                 // 加载保存的已填项
+                // for (var i in data) {
+                //     var input = document.getElementById(data[i].Id);
+                //     if (data[i].Result != null) {
+                //         input.value = data[i].Result;
+                //     }
+                // }
                 for(var i in data){
                     if(data[i].Result!=null){
-                        $('#data[i].Id').val(data[i].Result);
+                        var input = document.getElementById(data[i].Id);
+                        input.value=data[i].Result;
                     }
                 }
 
                 // 初始化悬浮栏
-                // $('#score_toolbar').empty();
                 hasVoteNum = res.hasVoteNum;
                 totalVoteNum = res.totalVoteNum;
                 var toolbarHtml = "<h4 class='f-blue' style='width:100%'>当前已评:" + hasVoteNum + "/" + totalVoteNum  + "</h4>";
                 $('#score_toolbar').html(toolbarHtml);
 
-                $('#score_pageTotal').val("共有"+totalVoteNum+"页");
-
                 // 分页处理
-                totalPageNum = Math.ceil(res.totalNum/contentNumPerPage); // 总页数
+                totalPageNum = Math.ceil(totalVoteNum/contentNumPerPage); // 总页数
                 var beginPage = (Math.ceil(pageNum/pageNumPerPage)-1)*pageNumPerPage+1; // 分页开始页码
                 var endPage = (beginPage+pageNumPerPage-1<totalPageNum)?(beginPage+pageNumPerPage-1):totalPageNum; // 分页结束页码（考虑每页显示的页码数）
                 if((endPage-beginPage<pageNumPerPage)&&(totalPageNum>pageNumPerPage)) {
                     beginPage = endPage-pageNumPerPage+1;
                 }
+                $('#score_pageTotal').text("共有"+totalPageNum+"页,当前第"+pageNum+"页");
 
                 // 生成分页按钮html
                 var pageHtml = "";
                 for (var i = beginPage; i <= endPage; i++){
-                    pageHtml += "<a href='javascript:showContentOfPage(" + i + ");'" + i + "</a>";
+                    pageHtml += "<a href='javascript:showContentOfPage(" + i + ");'>" + i + "</a>";
                 }
-                $("#pager").html(pageHtml);
+                $("#score_pager").html(pageHtml);
                 // 取消加载logo
                 $.hideLoading();
             }
@@ -146,7 +154,8 @@ $(document).on("click", "#score_lastPage", function() {
     if(page === 1){
         $.toast("当前已是第一页！");
     }else{
-        showContentOfPage(page-1);
+        page--;
+        showContentOfPage(page);
     }
 });
 
@@ -155,7 +164,8 @@ $(document).on("click", "#score_nextPage", function() {
     if(page === totalPageNum){
         $.toast("当前已是最后一页！");
     }else{
-        showContentOfPage(page+1);
+        page++;
+        showContentOfPage(page);
     }
 });
 

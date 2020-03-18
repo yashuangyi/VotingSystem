@@ -46,11 +46,19 @@ namespace VotingSystem.Controllers
         public ActionResult GetContentList(int expertId, int pageNum, int contentNumPerPage)
         {
             Expert expert = Db.Queryable<Expert>().Where(it => it.Id == expertId).Single();
+
+            // 为了防止某些皮玩家投票完成后按返回键再改数据，这里做多一次判断
+            if (expert.Status == "已投票")
+            {
+                return Json(new { code = 404 }, JsonRequestBehavior.AllowGet);
+            }
+
             Project project = Db.Queryable<Project>().Where(it => it.Id == expert.ProjectId).Single();
             List<Content> list = new List<Content>();
             list = Db.Queryable<Content>().Where(it => it.ProjectId == project.Id).OrderBy(it => it.Id).ToList();
             int count = list.Count();
             list = list.Skip((pageNum - 1) * contentNumPerPage).Take(contentNumPerPage).ToList();
+            int hasVoteNum = Db.Queryable<Record>().Where(it => it.ExpertId == expertId && it.Value != null).ToList().Count();
             for (int i = 0; i < list.Count(); i++)
             {
                 // 查询是否有值
@@ -61,7 +69,7 @@ namespace VotingSystem.Controllers
                 }
             }
 
-            return Json(new { code = 200, count, list }, JsonRequestBehavior.AllowGet);
+            return Json(new { code = 200, totalVoteNum = count, list, hasVoteNum }, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -121,6 +129,12 @@ namespace VotingSystem.Controllers
         /// <returns>json.</returns>
         public ActionResult SubmitScore(int expertId)
         {
+            var expert = Db.Queryable<Expert>().Where(it => it.Id == expertId).Single();
+            var project = Db.Queryable<Project>().Where(it => it.Id == expert.ProjectId).Single();
+            expert.Status = "已投票";
+            Db.Updateable(expert).ExecuteCommand();
+            project.HasVote++;
+            Db.Updateable(project).ExecuteCommand();
             var recordList = Db.Queryable<Record>().Where(it => it.ExpertId == expertId).ToList();
             foreach (Record record in recordList)
             {
