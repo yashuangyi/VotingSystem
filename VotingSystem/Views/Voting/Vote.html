@@ -2,9 +2,46 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <!-- viewport是自动适配手机屏幕的大小的 -->
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=0">
+    <title>评分界面</title>
+    <script src="../../Scripts/jquery-3.4.1.js"></script>
+    <script src="../../Source/packages/weui/js/zepto.weui.js"></script>
+    <script src="../../Source/packages/weui/js/zepto.min.js"></script>
+    <script src="../../Scripts/Project/Voting/vote.js"></script>
+    <link rel="stylesheet" href="../../Source/packages/weui/css/weui.css">
+    <link rel="stylesheet" href="../../Source/packages/weui/css/weuix.css">
+    <!-- 导航悬浮固定样式 -->
+    <style>
+        .none{display: none}
+        #score_toolbar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        max-width: 100%;
+        left: 0;
+        top:0;  /*置顶*/
+        /*bottom: 0px; */ /*置底*/
+        margin: auto;
+        }
+        </style>
 </head>
 <body>
-
+    <div style="background-color: #DCDCDC;">
+        <div id="vote_toolbar" style="position:fixed;display:block;background-color:#DCDCDC;"></div>
+        <br><br>
+        <div id="vote_content"></div>
+        <a id="vote_lastPage" class="weui-btn weui-btn_plain-primary">上一页</a>
+        <a id="vote_nextPage" class="weui-btn weui-btn_plain-primary">下一页</a>
+        <a id="vote_submit" class="weui-btn weui-btn_primary">提交</a>
+        <div class="page-bd-15">
+            <div id="vote_pager" class="pager2" style="background-color:white;"></div>
+        </div>
+        <div align="center">
+            <label id="vote_pageTotal"></label>
+        </div>
+        <input type="text" id="vote_expertId" value="@ViewBag.ExpertId" hidden=""/>
+    </div>
 </body>
 </html>

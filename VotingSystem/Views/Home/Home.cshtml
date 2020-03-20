@@ -10,6 +10,8 @@
 </head>
 
 <body>
+    <input type="text" id="admin_id" value="@ViewBag.AdminId" hidden=""/>
+    <input type="text" id="admin_power" hidden=""/>
     <div class="layui-layout layui-layout-admin" id="face">
         <div class="layui-header">
             <div class="layui-logo">
@@ -32,8 +34,8 @@
             <ul class="layui-nav layui-layout-right">
                 <li class="layui-nav-item">
                     <a href="javascript:;">
-                        <img src="../../Source/images/headPic.jpg" class="layui-nav-img">
-                        亚双义、一真
+                        <img id="admin_photo" src="../../Source/images/headPic.jpg" class="layui-nav-img">
+                        <label id="admin_name"></label>
                     </a>
                 </li>
                 <li class="layui-nav-item"><a href="../Login/Login">退出登录</a></li>
@@ -43,15 +45,27 @@
         <!-- 左边导航页面 -->
         <div class="layui-side layui-bg-black">
             <ul class="layui-side-scroll layui-nav layui-nav-tree">
-                <li class="layui-nav-item"><a onclick="setSrc('/Project/Project')"><i class="layui-icon layui-icon-survey" style="font-size: 18px; color: #55ffff;"></i>&nbsp 项目管理</a></li>
-                <li class="layui-nav-item"><a onclick="setSrc('/Expert/Expert')"><i class="layui-icon layui-icon-user" style="font-size: 18px; color: #55ffff;"></i>&nbsp 评委管理</a></li>
-                <li class="layui-nav-item"><a onclick="setSrc('/Result/Result')"><i class="layui-icon layui-icon-form" style="font-size: 18px; color: #55ffff;"></i>&nbsp 评审结果</a></li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">评审管理</a>
+                     <dl class="layui-nav-child">
+                        <dd><a onclick="setSrc('/Project/Project')"><i class="layui-icon layui-icon-survey" style="font-size: 18px; color: #55ffff;"></i>&nbsp 项目管理</a></dd>
+                        <dd><a onclick="setSrc('/Expert/Expert')"><i class="layui-icon layui-icon-user" style="font-size: 18px; color: #55ffff;"></i>&nbsp 评委管理</a></dd>
+                        <dd><a onclick="setSrc('/Result/Result')"><i class="layui-icon layui-icon-form" style="font-size: 18px; color: #55ffff;"></i>&nbsp 评审结果</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">账户管理</a>
+                     <dl class="layui-nav-child">
+                        <dd><a onclick="setSrc('/Admin/Admin')"><i class="layui-icon layui-icon-friends" style="font-size: 18px; color: #55ffff;"></i>&nbsp 管理员设置</a></dd>
+                        <dd><a onclick="setSrc('/Expert/Expert')"><i class="layui-icon layui-icon-password" style="font-size: 18px; color: #55ffff;"></i>&nbsp 修改密码</a></dd>
+                    </dl>
+                </li>
             </ul>
         </div>
 
         <!-- 主体显示的地方 -->
         <div class="layui-body" id="body">
-            <iframe id="iframeMain" src="/Home/HomePage" frameborder="0" style="width:100%;height:100%;" class="layadmin-iframe"></iframe>
+            <iframe id="iframeMain" src="" frameborder="0" style="width:100%;height:100%;" class="layadmin-iframe"></iframe>
         </div>
 
         <div class="layui-footer" align="center">

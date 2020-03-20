@@ -64,11 +64,11 @@ layui.config({
 			title:"新建投票项目",
 			area:['600px','700px'],
 			btn:['保存','取消'],
-			btnAlin:'c', //按钮居中
+			btnAlign:'c', //按钮居中
 			content:$('#div_addVote'),
 			success:function(layero,index){// 弹出layer后的回调函数,参数分别为当前层DOM对象以及当前层索引
 				// 解决按回车键重复弹窗问题
-				$('focus').blur();
+				$(':focus').blur();
 				// 为当前DOM对象添加form标志
 				layero.addClass('layui-form');
 				// 将保存按钮赋予submit属性
@@ -156,7 +156,7 @@ layui.config({
 					form.render();
 				},
 				yes:function(index,layero){// 确认按钮回调函数,参数分别为当前层索引以及当前层DOM对象
-					form.on('submit(btn_saveAdd)',function(data){//data按name获取
+					form.on('submit(btn_saveEdit)',function(data){//data按name获取
 						$.ajax({
 							type: 'post',
 							url:'/Project/EditProject',

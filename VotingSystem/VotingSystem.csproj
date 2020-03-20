@@ -155,6 +155,7 @@
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\Project\Admin\admin.js" />
     <Content Include="Scripts\Project\MyVote\myVote.js" />
     <Content Include="Scripts\Project\Expert\expert.js" />
     <Content Include="Scripts\Project\Home\home.js" />
@@ -271,6 +272,7 @@
     <Content Include="Source\packages\layui\lay\modules\tree.js" />
     <Content Include="Source\packages\layui\lay\modules\upload.js" />
     <Content Include="Source\packages\layui\lay\modules\util.js" />
+    <Content Include="Views\Admin\Admin.html" />
     <Content Include="Views\Home\HomePage.html" />
     <Content Include="Views\Login\ExpertLogin.html" />
     <Content Include="Views\MyVote\MyVote.html" />
@@ -282,6 +284,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ExpertController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -329,6 +332,7 @@
     <Content Include="Views\Voting\Vote.cshtml" />
     <Content Include="Views\VotingResult\VotingResult.cshtml" />
     <Content Include="Views\Home\HomePage.cshtml" />
+    <Content Include="Views\Admin\Admin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

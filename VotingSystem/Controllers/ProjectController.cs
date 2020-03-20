@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using SqlSugar;
@@ -194,8 +195,8 @@ namespace VotingSystem.Controllers
                 string name = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
                 string path = "/Source/ProjectFile/";
                 string uploadPath = Server.MapPath("~/" + path);
-                file.SaveAs(uploadPath + name + ".xlsx");
-                filePath = path + name + ".xlsx";
+                file.SaveAs(uploadPath + name + Path.GetExtension(fileName));
+                filePath = path + name + Path.GetExtension(fileName);
                 msg = "上传成功！";
                 return Json(new { filePath, msg, code = 200, fileName }, JsonRequestBehavior.AllowGet);
             }

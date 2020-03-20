@@ -41,6 +41,7 @@ namespace VotingSystem.Controllers
                 var login = Db.Queryable<Admin>().Where(it => it.Account == account && it.Password == password).Single();
                 if (login != null)
                 {
+                    Session.Add("adminId", login.Id);
                     return Json(new { code = 200 }, JsonRequestBehavior.AllowGet);
                 }
                 else

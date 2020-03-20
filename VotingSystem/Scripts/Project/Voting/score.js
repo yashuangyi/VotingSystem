@@ -33,24 +33,18 @@ function showContentOfPage(pageNum) {
                     showHtml += 
                     "<div class='page-hd-title'>" + data[i].Number + " " + data[i].Name + "</div>" +
                     "<div class='weui-cells weui-cells_form'>" +
-                    "<div class='weui-cell'>" +
-                    "<div class='weui-cell__hd'><label class='weui-label'>评分</label></div>"+
-                    "<div class='weui-cell__bd weui-cell__primary'>"+
-                    "<input class='weui-input' onchange = 'changeState(this)' pattern='^([0-9]|10)$' required name='" + data[i].Id + "' id='" + data[i].Id + "'placeholder='请输入评分（0~10分）', type='number'>" +
-                    "</div>" +
-                    "</div>" +
+                        "<div class='weui-cell'>" +
+                            "<div class='weui-cell__hd'><label class='weui-label'>评分</label></div>"+
+                            "<div class='weui-cell__bd weui-cell__primary'>"+
+                                "<input class='weui-input' onchange = 'changeState(this)' pattern='^([0-9]|10)$' required name='" + data[i].Id + "' id='" + data[i].Id + "'placeholder='请输入评分（0~10分）', type='number'>" +
+                            "</div>" +
+                        "</div>" +
                     "</div>" +
                     "</br>";
                 }
                 $('#score_content').html(showHtml);
                 // 加载保存的已填项
-                // for (var i in data) {
-                //     var input = document.getElementById(data[i].Id);
-                //     if (data[i].Result != null) {
-                //         input.value = data[i].Result;
-                //     }
-                // }
-                for(var i in data){
+                for(let i in data){
                     if(data[i].Result!=null){
                         var input = document.getElementById(data[i].Id);
                         input.value=data[i].Result;
@@ -74,7 +68,7 @@ function showContentOfPage(pageNum) {
 
                 // 生成分页按钮html
                 var pageHtml = "";
-                for (var i = beginPage; i <= endPage; i++){
+                for (let i = beginPage; i <= endPage; i++){
                     pageHtml += "<a href='javascript:showContentOfPage(" + i + ");'>" + i + "</a>";
                 }
                 $("#score_pager").html(pageHtml);
@@ -116,7 +110,7 @@ function changeState(element){
                 expertId:$('#score_expertId').val(),
                 value: element.value,
             };
-            $.post("/Voting/ChangeScoreValue", data,
+            $.post("/Voting/ChangeValue", data,
                 function (res) {
                     if(res.code === 200){
                         if(res.isAdd === true){

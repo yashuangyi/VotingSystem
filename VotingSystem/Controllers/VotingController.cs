@@ -73,13 +73,13 @@ namespace VotingSystem.Controllers
         }
 
         /// <summary>
-        /// 新增或修改评分.
+        /// 新增或修改评分或单选项.
         /// </summary>
         /// <param name="contentId">内容id.</param>
         /// <param name="expertId">评委id.</param>
-        /// <param name="value">评分值.</param>
+        /// <param name="value">评分值或单选项的值.</param>
         /// <returns>json.</returns>
-        public ActionResult ChangeScoreValue(int contentId, int expertId, int value)
+        public ActionResult ChangeValue(int contentId, int expertId, int value)
         {
             bool isAdd = false;
             Record record = Db.Queryable<Record>().Where(it => it.ContentId == contentId && it.ExpertId == expertId).Single();
@@ -140,6 +140,46 @@ namespace VotingSystem.Controllers
             {
                 var content = Db.Queryable<Content>().Where(it => it.Id == record.ContentId).Single();
                 content.Score += (int)record.Value;
+                Db.Updateable(content).ExecuteCommand();
+            }
+
+            return Json(new { code = 200 }, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 提交投票.
+        /// </summary>
+        /// <param name="expertId">评委id.</param>
+        /// <returns>json.</returns>
+        public ActionResult SubmitVote(int expertId)
+        {
+            var expert = Db.Queryable<Expert>().Where(it => it.Id == expertId).Single();
+            var project = Db.Queryable<Project>().Where(it => it.Id == expert.ProjectId).Single();
+            expert.Status = "已投票";
+            Db.Updateable(expert).ExecuteCommand();
+            project.HasVote++;
+            Db.Updateable(project).ExecuteCommand();
+            var recordList = Db.Queryable<Record>().Where(it => it.ExpertId == expertId).ToList();
+            foreach (Record record in recordList)
+            {
+                var content = Db.Queryable<Content>().Where(it => it.Id == record.ContentId).Single();
+                if (record.Value == 1)
+                {
+                    content.FirstPrizeNum += 1;
+                }
+                else if (record.Value == 2)
+                {
+                    content.SecondPrizeNum += 1;
+                }
+                else if (record.Value == 3)
+                {
+                    content.ThirdPrizeNum += 1;
+                }
+                else
+                {
+                    content.GiveupNum += 1;
+                }
+
                 Db.Updateable(content).ExecuteCommand();
             }
 
