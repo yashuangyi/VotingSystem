@@ -156,7 +156,8 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\Project\Admin\admin.js" />
-    <Content Include="Scripts\Project\MyVote\myVote.js" />
+    <Content Include="Scripts\Project\MyVoting\myScore.js" />
+    <Content Include="Scripts\Project\MyVoting\myVote.js" />
     <Content Include="Scripts\Project\Expert\expert.js" />
     <Content Include="Scripts\Project\Home\home.js" />
     <Content Include="Scripts\Project\Login\login.js" />
@@ -275,7 +276,6 @@
     <Content Include="Views\Admin\Admin.html" />
     <Content Include="Views\Home\HomePage.html" />
     <Content Include="Views\Login\ExpertLogin.html" />
-    <Content Include="Views\MyVote\MyVote.html" />
     <Content Include="Views\VotingHome\VotingHome.html" />
     <Content Include="Views\VotingResult\VotingResult.html" />
     <Content Include="Views\Voting\Score.html" />
@@ -288,7 +288,7 @@
     <Compile Include="Controllers\ExpertController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\MyVoteController.cs" />
+    <Compile Include="Controllers\MyVotingController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\ResultController.cs" />
     <Compile Include="Controllers\VotingController.cs" />
@@ -327,12 +327,13 @@
     <Content Include="Source\ProjectFile\项目文件模板.xlsx" />
     <Content Include="Views\Login\ExpertLogin.cshtml" />
     <Content Include="Views\VotingHome\VotingHome.cshtml" />
-    <Content Include="Views\MyVote\MyVote.cshtml" />
+    <Content Include="Views\MyVoting\MyVote.cshtml" />
     <Content Include="Views\Voting\Score.cshtml" />
     <Content Include="Views\Voting\Vote.cshtml" />
     <Content Include="Views\VotingResult\VotingResult.cshtml" />
     <Content Include="Views\Home\HomePage.cshtml" />
     <Content Include="Views\Admin\Admin.cshtml" />
+    <Content Include="Views\MyVoting\MyScore.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

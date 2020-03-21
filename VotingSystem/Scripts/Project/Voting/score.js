@@ -36,7 +36,7 @@ function showContentOfPage(pageNum) {
                         "<div class='weui-cell'>" +
                             "<div class='weui-cell__hd'><label class='weui-label'>评分</label></div>"+
                             "<div class='weui-cell__bd weui-cell__primary'>"+
-                                "<input class='weui-input' onchange = 'changeState(this)' pattern='^([0-9]|10)$' required name='" + data[i].Id + "' id='" + data[i].Id + "'placeholder='请输入评分（0~10分）', type='number'>" +
+                                "<input class='weui-input' onchange = 'changeState(this)' pattern='^([0-9]|10)$' required name='" + data[i].Id + "' id='" + data[i].Id + "'placeholder='请输入评分（0~10分）' type='number'>" +
                             "</div>" +
                         "</div>" +
                     "</div>" +

@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <!-- viewport是自动适配手机屏幕的大小的 -->
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=0">
+    <title>评分记录</title>
+    <script src="../../Scripts/jquery-3.4.1.js"></script>
+    <script src="../../Source/packages/weui/js/zepto.weui.js"></script>
+    <script src="../../Source/packages/weui/js/zepto.min.js"></script>
+    <script src="../../Scripts/Project/MyVoting/myVote.js"></script>
+    <link rel="stylesheet" href="../../Source/packages/weui/css/weui.css">
+    <link rel="stylesheet" href="../../Source/packages/weui/css/weuix.css">
+</head>
+<body>
+    <div style="background-color: #DCDCDC;">
+        <div id="myVote_content"></div>
+        <a id="myVote_lastPage" class="weui-btn weui-btn_plain-primary">上一页</a>
+        <a id="myVote_nextPage" class="weui-btn weui-btn_plain-primary">下一页</a>
+        <a id="myVote_submit" class="weui-btn weui-btn_primary">提交</a>
+        <div class="page-bd-15">
+            <div id="myVote_pager" class="pager2" style="background-color:white;"></div>
+        </div>
+        <div align="center">
+            <label id="myVote_pageTotal"></label>
+        </div>
+        <input type="text" id="myVote_expertId" value="@ViewBag.ExpertId" hidden=""/>
+    </div>
+</body>
+</html>

@@ -55,7 +55,21 @@ $(document).on("click", "#btn_startVote", function() {
 // 监听“我的评审记录”按钮
 $(document).on("click", "#btn_myVote", function() {
     if($('#expert_isVote').val() === "已投票"){
-        location.href = "/MyVote/MyVote?expertId="+$('#expert_id').val();
+        $.ajax({
+            type: "post",
+            url: "/VotingHome/GetProjectDetail",
+            data: {expertId:$('#expert_id').val()},
+            dataType: "json",
+            success: function (res) {
+                if(res.code === 200){
+                    if(res.project.Method === "评分"){
+                        location.href = "/MyVoting/MyScore?expertId="+$('#expert_id').val();
+                    }else{
+                        location.href = "/MyVoting/MyVote?expertId="+$('#expert_id').val();
+                    }
+                }
+            }
+        });
     }else{
         $.alert("请先完成投票！", "提示");
     }
