@@ -156,6 +156,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\Project\Admin\admin.js" />
+    <Content Include="Scripts\Project\Home\homePage.js" />
     <Content Include="Scripts\Project\MyVoting\myScore.js" />
     <Content Include="Scripts\Project\MyVoting\myVote.js" />
     <Content Include="Scripts\Project\Expert\expert.js" />

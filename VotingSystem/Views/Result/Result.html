@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>评审结果</title>
-		<script src="~/Scripts/jquery-3.4.1.js"></script>
+		<script src="../../Scripts/jquery-3.4.1.js"></script>
 		<script src="../../Source/packages/layui/layui.js"></script>
 		<script src="../../Scripts/Project/Result/result.js"></script>
 		<link rel="stylesheet" href="../../Source/packages/layui/css/layui.css">
@@ -24,7 +24,7 @@
 						<i class="layui-icon">&#xe600;</i>统计结果
 					</button>
 					<button type="button" class="layui-btn layui-btn-radius layui-btn-danger" lay-submit lay-filter="lay-outputResult">
-						<i class="layui-icon">&#xe601;</i>导出数据
+						<i class="layui-icon">&#xe601;</i>导出Excel
 					</button>
 				</div>
 			</form>
@@ -34,10 +34,13 @@
 			<table id="table_result" lay-filter="table_result"></table>
 		</blockquote>
 		<!-- 统计结果（投票） -->
-		<div style="padding-left: 20px;padding-top: 20px;padding-right:20px;" id="div_getVoteResult" hidden="">
+		<div style="padding-left: 20px;padding-top: 20px;padding-right:20px;" id="div_getVoteResult" hidden>
 			<form class="layui-form">
-				<div class="layui-form-item">
-					
+				<div class="layui-form-item" hidden>
+					<div class ="layui-input-inline">
+						<!-- 记录内容ID -->
+						<input type="text" name="contentId" id="contentId" disabled>
+					</div>
 				</div>
 			</form>
 		</div>

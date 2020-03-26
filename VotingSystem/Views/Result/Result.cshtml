@@ -3,35 +3,46 @@
 	<head>
 		<meta charset="utf-8">
 		<title>评审结果</title>
-		<script src="~/Scripts/jquery-3.4.1.js"></script>
+		<script src="../../Scripts/jquery-3.4.1.js"></script>
 		<script src="../../Source/packages/layui/layui.js"></script>
 		<script src="../../Scripts/Project/Result/result.js"></script>
 		<link rel="stylesheet" href="../../Source/packages/layui/css/layui.css">
 	</head>
 	<body>
-        <blockquote class="layui-elem-quote layui-quote-nm">
-            <form class="layui-form">
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">按项目查询</label>
-                        <div class="layui-input-inline">
-                            <select id="search_Project" name="search_Project" lay-verify="required" lay-filter="search_Project">
-                                <option value="">请选择待查询项目</option>
-                            </select>
-                        </div>
-                    </div>
-                    <button type="button" class="layui-btn layui-btn-normal" lay-submit lay-filter="lay-getResult">
-                        <i class="layui-icon">&#xe600;</i>统计结果
-                    </button>
-                    <button type="button" class="layui-btn layui-btn-radius layui-btn-danger" lay-submit lay-filter="lay-outputResult">
-                        <i class="layui-icon">&#xe601;</i>导出数据
-                    </button>
-                </div>
-            </form>
-        </blockquote>
+		<blockquote class="layui-elem-quote layui-quote-nm">
+			<form class="layui-form">
+				<div class="layui-form-item">
+					<div class="layui-inline">
+						<label class="layui-form-label">按项目查询</label>
+						<div class="layui-input-inline">
+							<select id="search_Project" name="search_Project" lay-verify="required" lay-filter="search_Project">
+								<option value="">请选择待查询项目</option>
+							</select>
+						</div>
+					</div>
+					<button type="button" class="layui-btn layui-btn-normal" lay-submit lay-filter="lay-getResult">
+						<i class="layui-icon">&#xe600;</i>统计结果
+					</button>
+					<button type="button" class="layui-btn layui-btn-radius layui-btn-danger" lay-submit lay-filter="lay-outputResult">
+						<i class="layui-icon">&#xe601;</i>导出Excel
+					</button>
+				</div>
+			</form>
+		</blockquote>
 		<blockquote class="layui-elem-quote layui-quote-nm">
 			<!--结果信息的表格-->
 			<table id="table_result" lay-filter="table_result"></table>
 		</blockquote>
+		<!-- 统计结果（投票） -->
+		<div style="padding-left: 20px;padding-top: 20px;padding-right:20px;" id="div_getVoteResult" hidden>
+			<form class="layui-form">
+				<div class="layui-form-item" hidden>
+					<div class ="layui-input-inline">
+						<!-- 记录内容ID -->
+						<input type="text" name="contentId" id="contentId" disabled>
+					</div>
+				</div>
+			</form>
+		</div>
 	</body>
 </html>

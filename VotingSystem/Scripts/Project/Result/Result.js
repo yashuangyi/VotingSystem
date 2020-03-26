@@ -42,4 +42,38 @@ layui.config({
 			where:{search:data.value}
 		});
 	});
+
+	//监听统计结果
+	form.on('submie(lay-getResult)', function(){
+		if($('#search_Project').val() === '请选择待查询项目'){
+			layer.msg('请先选择项目！');
+			return;
+		}
+		$.post("/Result/GetResult/", {projectName:$('#search_Project').val()},
+			function (res) {
+				if(res.code === 200){
+					layer.msg("统计结果完成！");
+					table.reload('table_result');
+				}else{
+					layer.msg(res.msg);
+				}
+			},
+			"json"
+		);
+	});
+
+	//监听导出Excel
+	form.on('submie(lay-outputResult)', function(){
+		if($('#search_Project').val() === '请选择待查询项目'){
+			layer.msg('请先选择项目！');
+			return;
+		}
+		layer.confirm('是否要导出当前项目的数据？',{
+			icon:3,
+			btn:['确定','取消'],
+		},function(index){
+			layer.close(index);
+			window.open('/Result/OutputResult?projectName='+$('#search_Project').val());
+		});
+	});
 });

@@ -24,7 +24,7 @@ namespace VotingSystem.Models
         public int ProjectId { get; set; }
 
         /// <summary>
-        /// Gets or sets 状态.
+        /// Gets or sets 状态（未投票、已投票）.
         /// </summary>
         public string Status { get; set; }
 

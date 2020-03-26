@@ -44,7 +44,7 @@ namespace VotingSystem.Models
         public string EndTime { get; set; }
 
         /// <summary>
-        /// Gets or sets 状态.
+        /// Gets or sets 状态（未启动、进行中、结束投票、完成统计）.
         /// </summary>
         public string Status { get; set; }
 

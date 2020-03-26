@@ -68,8 +68,12 @@ namespace VotingSystem.Controllers
             // 自增列用法
             int projectId = Db.Insertable(project).ExecuteReturnIdentity();
 
-            // 新增评委
-            AddExpert(project.ExpertCount, project.Name, projectId);
+            // 先确保项目名不存在重复
+            var isExist = Db.Queryable<Project>().Where(it => it.Name == project.Name).Single();
+            if (isExist != null)
+            {
+                return Json(new { code = 404, msg = "已存在同名项目！" }, JsonRequestBehavior.AllowGet);
+            }
 
             // 读取项目
             int contentNum = ReadProject(projectId, project.FilePath);
@@ -78,6 +82,9 @@ namespace VotingSystem.Controllers
                 project.Id = projectId;
                 project.ContentNum = contentNum;
                 Db.Updateable(project).ExecuteCommand();
+
+                // 新增评委
+                AddExpert(project.ExpertCount, project.Name, projectId);
                 return Json(new { code = 200 }, JsonRequestBehavior.AllowGet);
             }
             else
